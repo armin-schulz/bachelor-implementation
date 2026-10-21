@@ -9,3 +9,6 @@ python -m venv .venv
 ```
 python -m pip install -e .
 ```
+```
+git format-patch -1 HEAD
+```
