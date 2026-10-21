@@ -1,0 +1,17 @@
+[project]
+name = "ba"
+version = "0.1.0"
+description = "Plots of the results of Evaluation.java and NonSegEvaluation.java"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pandas>=2.2.3,<3",
+    "matplotlib>=3.9,<4",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+# plot scripts in src/main/python/com/id are run directly, the install only provides the dependencies
+[tool.setuptools]
+py-modules = []
