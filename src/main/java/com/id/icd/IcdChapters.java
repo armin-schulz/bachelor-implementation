@@ -16,10 +16,11 @@ import java.util.regex.Pattern;
 public final class IcdChapters {
 
   private static final String RESOURCE = "/icd10gm_chapters.csv";
-  private static final Pattern CATEGORY = Pattern.compile("[a-z][0-9]{2}");
-  private static final Pattern NORMALIZED_CODE = Pattern.compile("[a-z][0-9]{2}[0-9a-z-]*");
+  private static final Pattern CATEGORY = Pattern.compile("[A-Z]\\d{2}");
+  private static final Pattern CODE = Pattern.compile("[A-Z]\\d{2}(\\.\\d+)?");
 
   /**
+   * @param name roman numeral
    * @param first first three character category of chapter, normalized
    * @param last  last three character category of chapter, normalized
    */
@@ -81,11 +82,14 @@ public final class IcdChapters {
    * @throws IllegalArgumentException if code is not normalized or belongs to no chapter
    */
   public String chapter(String code) {
-    if (code == null || !NORMALIZED_CODE.matcher(code).matches()) {
+    if (code == null || !CODE.matcher(code).matches()) {
       throw new IllegalArgumentException("not a normalized icd-10-gm code: " + code);
     }
     String category = code.substring(0, 3);
     for (Chapter chapter : chapters) {
+      if (chapter.name().equals(code)) {
+        return chapter.name;
+      }
       if (chapter.first().compareTo(category) <= 0 && category.compareTo(chapter.last()) <= 0) {
         return chapter.name();
       }

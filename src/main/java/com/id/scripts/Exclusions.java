@@ -1,6 +1,7 @@
 package com.id.scripts;
 
 import com.id.custom.MappingLine;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,14 +32,15 @@ public class Exclusions {
     Path mappingPath = Paths.get(args[2]);
     Path filteredPath = Paths.get(args[3]);
     Path statsPath = Paths.get(args[4]);
+    Path unmatchedPath = Paths.get(args[5]);
 
     try {
       Set<Long> validSctIds = new HashSet<>();
       applyToLines(validSctIdsPath, cs -> validSctIds.add(Long.parseLong(cs[0])), StandardCharsets.UTF_8);
       Map<String, Set<Long>> reference = new HashMap<>();
       applyToLines(referencePath,
-         cs -> reference.computeIfAbsent(cs[0], k -> new HashSet<>()).addAll(parseIds(cs[1])),
-         StandardCharsets.UTF_8);
+          cs -> reference.computeIfAbsent(cs[0], k -> new HashSet<>()).addAll(parseIds(cs[1])),
+          StandardCharsets.UTF_8);
       List<MappingLine> mappings = new ArrayList<>();
       applyToLines(mappingPath, cs -> {
         final String ident = cs[0];
@@ -57,6 +59,7 @@ public class Exclusions {
       Map<MappingLine, Set<Long>> filteredMappings = filterMappings(mappings, reference, validSctIds, stats);
       writeFiltered(filteredMappings, filteredPath);
       writeFilterStats(stats, mappings.size(), filteredMappings.size(), statsPath);
+      writeUnmatchedCodes(stats.unmatchedCodes, unmatchedPath);
     } catch (IOException e) {
       LOGGER.error(e.getMessage(), e);
     }
@@ -71,12 +74,12 @@ public class Exclusions {
         String referenceString = StringUtils.join(entry.getValue(), " ");
         String proposalsString = proposalsToString(mapping.proposals());
         writer.write(mapping.ident() + "\t" + mapping.nonSeg() + "\t" + mapping.code()
-           + "\t" + referenceString + "\t" + proposalsString);
+            + "\t" + referenceString + "\t" + proposalsString);
       }
     }
   }
 
-    private static void writeFilterStats(Stats stats, int nbrMappings, int nbrFilteredMappings, Path path) throws IOException {
+  private static void writeFilterStats(Stats stats, int nbrMappings, int nbrFilteredMappings, Path path) throws IOException {
     try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
       writer.write("stat\tremoved\tremaining");
       writer.newLine();
@@ -106,6 +109,26 @@ public class Exclusions {
     }
   }
 
+  private static void writeUnmatchedCodes(List<String> unmatched, Path path) throws IOException {
+    unmatched.sort(String::compareTo);
+    List<String> uniqueUnmatched = unmatched.stream()
+        .distinct()
+        .sorted()
+        .toList();
+    try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
+      writer.write("unmatched\tunique unmatched");
+      writer.newLine();
+      for (int i = 0; i < unmatched.size(); i++) {
+        String line = unmatched.get(i) + "\t";
+        if (i < uniqueUnmatched.size()) {
+          line += uniqueUnmatched.get(i);
+        }
+        writer.write(line);
+        writer.newLine();
+      }
+    }
+  }
+
   private static Map<MappingLine, Set<Long>> filterMappings(List<MappingLine> mappings, Map<String, Set<Long>> references,
                                                             Set<Long> validSctIds, Stats stats) {
     Map<MappingLine, Set<Long>> filteredMappings = new HashMap<>(mappings.size());
@@ -120,6 +143,7 @@ public class Exclusions {
       }
       Set<Long> reference = references.get(m.code());
       if (reference == null) {
+        stats.unmatchedCodes.add(m.code());
         stats.noReference++;
         continue;
       }
@@ -188,6 +212,7 @@ public class Exclusions {
     private int invalidReference = 0;
     private int rmProposals = 0;
     private int rmMappingForRmProposal = 0;
+    private List<String> unmatchedCodes = new ArrayList<>();
 
   }
 }

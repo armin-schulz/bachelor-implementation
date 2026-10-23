@@ -54,7 +54,7 @@ public class ExportOhdsi {
        row -> {
          String vocabulary = row.get("vocabulary_id");
          if ("ICD10GM".equals(vocabulary)) {
-           String code = normalizeIcd(row.get("concept_code"));
+           String code = row.get("concept_code");
            if (code.isEmpty()) {
              throw new IllegalArgumentException("empty normalized icd code for sct id " + row.get("concept_id"));
            }

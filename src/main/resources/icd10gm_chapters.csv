@@ -1,23 +1,23 @@
 chapter	first	last	title
-I	a00	b99	Bestimmte infektiöse und parasitäre Krankheiten
-II	c00	d48	Neubildungen
-III	d50	d90	Krankheiten des Blutes und der blutbildenden Organe sowie bestimmte Störungen mit Beteiligung des Immunsystems
-IV	e00	e90	Endokrine, Ernährungs- und Stoffwechselkrankheiten
-V	f00	f99	Psychische und Verhaltensstörungen
-VI	g00	g99	Krankheiten des Nervensystems
-VII	h00	h59	Krankheiten des Auges und der Augenanhangsgebilde
-VIII	h60	h95	Krankheiten des Ohres und des Warzenfortsatzes
-IX	i00	i99	Krankheiten des Kreislaufsystems
-X	j00	j99	Krankheiten des Atmungssystems
-XI	k00	k93	Krankheiten des Verdauungssystems
-XII	l00	l99	Krankheiten der Haut und der Unterhaut
-XIII	m00	m99	Krankheiten des Muskel-Skelett-Systems und des Bindegewebes
-XIV	n00	n99	Krankheiten des Urogenitalsystems
-XV	o00	o99	Schwangerschaft, Geburt und Wochenbett
-XVI	p00	p96	Bestimmte Zustände, die ihren Ursprung in der Perinatalperiode haben
-XVII	q00	q99	Angeborene Fehlbildungen, Deformitäten und Chromosomenanomalien
-XVIII	r00	r99	Symptome und abnorme klinische und Laborbefunde, die anderenorts nicht klassifiziert sind
-XIX	s00	t98	Verletzungen, Vergiftungen und bestimmte andere Folgen äußerer Ursachen
-XX	v01	y84	Äußere Ursachen von Morbidität und Mortalität
-XXI	z00	z99	Faktoren, die den Gesundheitszustand beeinflussen und zur Inanspruchnahme des Gesundheitswesens führen
-XXII	u00	u99	Schlüsselnummern für besondere Zwecke
+I	A00	B99	Bestimmte infektiöse und parasitäre Krankheiten
+II	C00	D48	Neubildungen
+III	D50	D90	Krankheiten des Blutes und der blutbildenden Organe sowie bestimmte Störungen mit Beteiligung des Immunsystems
+IV	E00	E90	Endokrine, Ernährungs- und Stoffwechselkrankheiten
+V	F00	F99	Psychische und Verhaltensstörungen
+VI	G00	G99	Krankheiten des Nervensystems
+VII	H00	H59	Krankheiten des Auges und der Augenanhangsgebilde
+VIII	H60	H95	Krankheiten des Ohres und des Warzenfortsatzes
+IX	I00	I99	Krankheiten des Kreislaufsystems
+X	J00	J99	Krankheiten des Atmungssystems
+XI	K00	K93	Krankheiten des Verdauungssystems
+XII	L00	L99	Krankheiten der Haut und der Unterhaut
+XIII	M00	M99	Krankheiten des Muskel-Skelett-Systems und des Bindegewebes
+XIV	N00	N99	Krankheiten des Urogenitalsystems
+XV	O00	O99	Schwangerschaft, Geburt und Wochenbett
+XVI	P00	P96	Bestimmte Zustände, die ihren Ursprung in der Perinatalperiode haben
+XVII	Q00	Q99	Angeborene Fehlbildungen, Deformitäten und Chromosomenanomalien
+XVIII	R00	R99	Symptome und abnorme klinische und Laborbefunde, die anderenorts nicht klassifiziert sind
+XIX	S00	T98	Verletzungen, Vergiftungen und bestimmte andere Folgen äußerer Ursachen
+XX	V01	Y84	Äußere Ursachen von Morbidität und Mortalität
+XXI	Z00	Z99	Faktoren, die den Gesundheitszustand beeinflussen und zur Inanspruchnahme des Gesundheitswesens führen
+XXII	U00	U99	Schlüsselnummern für besondere Zwecke
